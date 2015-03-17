@@ -1,0 +1,7 @@
+print "hello world"
+print "Oh my Lord"
+print "What shall I do"
+print "Somebody's calling my name"
+print "Hush"
+print "oh my lord, oh my lord...What shall I do"
+print "hummmm..."
