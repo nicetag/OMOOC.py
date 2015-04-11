@@ -11,21 +11,22 @@ paint_shape = "circle"
 paint_color = "Lightgrey"
 pos = [WIDTH / 2, HEIGHT / 2]
 shape_radius = 25
+shape_list = []
 
 #define event handler for mouse click, paint
 
-
-#mouse click
+#mouse click 
 def click(position):
-    global pos
+    global pos, shape_list
     pos = list(position)
-
+    shape_list.append([pos,paint_shape,paint_color])
+    
 #colors and shapes
 #colors
 def paint_lightgrey():
     global paint_color
     paint_color = "Lightgrey"
-
+    
 def paint_silver():
     global paint_color
     paint_color = "Silver"
@@ -53,18 +54,21 @@ def draw(canvas):
     x = pos[0]
     y = pos[1]
     r = shape_radius
+    
     if paint_shape == "triangle":
-        canvas.draw_polygon([(x,y+r),(x-r,y-r/2),(x+r,y-r/2)], 1, "White", paint_color)
+       canvas.draw_polygon([(x,y+r),(x-r,y-r/2),(x+r,y-r/2)], 1, "White", paint_color)
     elif paint_shape == "square":
-        canvas.draw_polygon([(x-r, y-r),(x-r, y+r),(x+r, y+r),(x+r, y-r)],1,"White",paint_color)
-elif paint_shape == "circle":
-    canvas.draw_circle(draw_pos, shape_radius ,1, "White", paint_color)
+       canvas.draw_polygon([(x-r, y-r),(x-r, y+r),(x+r, y+r),(x+r, y-r)],1,"White",paint_color)
+    elif paint_shape == "circle":
+       canvas.draw_circle(draw_pos, shape_radius ,1, "White", paint_color)
 
-
-
-
-
-
+# record in list
+    for draw_pos in shape_list:
+        if draw_pos[1] == "circle":
+            canvas.draw_circle(draw_pos[0], shape_radius,1, paint_color, draw_pos[2])
+        else:
+            canvas.draw_polygon(draw_pos[0], 1, paint_color, draw_pos[2])
+  
 # Create frames and assign callbacks to event handlers
 
 ##create frame and set color and canvas
@@ -82,10 +86,10 @@ frame.add_button("blue", paint_blue,100)
 frame.set_draw_handler(draw)
 frame.set_mouseclick_handler(click)
 
-#start frame
+#start frame 
 frame.start()
 
 
 
 
-
+            
