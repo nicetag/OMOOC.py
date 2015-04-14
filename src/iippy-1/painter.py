@@ -10,7 +10,7 @@ HEIGHT = 500
 paint_shape = "circle"
 paint_color = "Lightgrey"
 pos = [WIDTH / 2, HEIGHT / 2]
-shape_radius = 25
+radius = 25
 shape_list = []
 
 #define event handler for mouse click, paint
@@ -53,19 +53,19 @@ def draw(canvas):
     draw_pos = list(pos)
     x = pos[0]
     y = pos[1]
-    r = shape_radius
+    r = radius
     
     if paint_shape == "triangle":
        canvas.draw_polygon([(x,y+r),(x-r,y-r/2),(x+r,y-r/2)], 1, "White", paint_color)
     elif paint_shape == "square":
        canvas.draw_polygon([(x-r, y-r),(x-r, y+r),(x+r, y+r),(x+r, y-r)],1,"White",paint_color)
     elif paint_shape == "circle":
-       canvas.draw_circle(draw_pos, shape_radius ,1, "White", paint_color)
+       canvas.draw_circle(draw_pos, radius ,1, "White", paint_color)
 
 # record in list
     for draw_pos in shape_list:
         if draw_pos[1] == "circle":
-            canvas.draw_circle(draw_pos[0], shape_radius,1, paint_color, draw_pos[2])
+            canvas.draw_circle(draw_pos[0], radius,1, paint_color, draw_pos[2])
         else:
             canvas.draw_polygon(draw_pos[0], 1, paint_color, draw_pos[2])
   
