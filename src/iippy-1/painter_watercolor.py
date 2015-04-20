@@ -58,6 +58,7 @@ class Dot:
     def update(self):
         self.life -= 1
         self.color.brighten()
+        print self.color
         
     def get_life(self):
         return self.life
