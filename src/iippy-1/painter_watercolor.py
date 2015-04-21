@@ -58,7 +58,7 @@ class Dot:
     def update(self):
         self.life -= 1
         self.color.brighten()
-        self.radius += 1
+        self.radius += 0.1
 
        # print self.color
         
