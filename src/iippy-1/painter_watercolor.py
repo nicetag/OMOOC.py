@@ -52,27 +52,32 @@ class WDot:
         #	indefinitely, causing the program to slow down.
         self.life = lifespan
         self.dots = []
-        
+        self._gen_dots()
+           
     def draw(self, canvas):
         color_string = self.color.make_html()
         canvas.draw_circle(self.pos, self.radius, 1, color_string, color_string)
         
-    # Updates the life and causes the color to fade to white.
+   
     def _gen_dots(self):
-        for d in range(self.life)
-            color_string = self.color.brighten().make_html()
-
-            self.dots,append([self.pos
+        for d in range(self.life):
+            self.color.brighten()
+            color_string = self.color.make_html()
+            self.dots.append([self.pos
                     , (self.radius + 0.1)
                     , 1
                     , color_string, color_string
            ])
+     
+        print self.dots
+        
+# updates the life and causes the color to fade to white.
+    def update(self):
         self.life -= 1
         self.color.brighten()
         self.radius += 0.1
-
-       # print self.color
-        
+        #print self.color
+               
     def get_life(self):
         return self.life
 
@@ -95,7 +100,7 @@ def click(pos):
     print new_color
     print "HTML color is " + new_color.make_html()
     print
-    dots.append(Dot(pos, new_color, 20, 256))
+    dots.append(WDot(pos, new_color, 20, 256))
     WDot(pos, new_color, 20, 42)
     
 # Frame
