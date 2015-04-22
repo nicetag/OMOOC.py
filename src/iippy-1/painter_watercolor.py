@@ -41,21 +41,32 @@ class RGBcolor:
         self.green += 1
         self.blue += 1
         
-class Dot:
+class WDot:
     def __init__(self, pos, color, radius, lifespan):
+        '''lifespan as color steps:
+        '''
         self.pos = pos
         self.color = color
         self.radius = radius
         # Without lifespan, the number of dots would increase
         #	indefinitely, causing the program to slow down.
         self.life = lifespan
+        self.dots = []
         
     def draw(self, canvas):
         color_string = self.color.make_html()
         canvas.draw_circle(self.pos, self.radius, 1, color_string, color_string)
         
     # Updates the life and causes the color to fade to white.
-    def update(self):
+    def _gen_dots(self):
+        for d in range(self.life)
+            color_string = self.color.brighten().make_html()
+
+            self.dots,append([self.pos
+                    , (self.radius + 0.1)
+                    , 1
+                    , color_string, color_string
+           ])
         self.life -= 1
         self.color.brighten()
         self.radius += 0.1
@@ -85,6 +96,7 @@ def click(pos):
     print "HTML color is " + new_color.make_html()
     print
     dots.append(Dot(pos, new_color, 20, 256))
+    WDot(pos, new_color, 20, 42)
     
 # Frame
 
