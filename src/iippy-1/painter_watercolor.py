@@ -64,19 +64,20 @@ class WDot:
             self.color.brighten()
             color_string = self.color.make_html()
             self.dots.append([self.pos
-                    , (self.radius + 0.1)
+                    , (self.radius + (0.2 * d))
                     , 1
                     , color_string, color_string
            ])
-     
-        print self.dots
+        self.dots.reverse()
+        for i in self.dots:
+            print i
         
 # updates the life and causes the color to fade to white.
     def update(self):
         self.life -= 1
         self.color.brighten()
         self.radius += 0.1
-        #print self.color
+        #print self.color.reverse
                
     def get_life(self):
         return self.life
