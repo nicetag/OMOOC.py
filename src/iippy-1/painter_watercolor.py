@@ -14,7 +14,7 @@ import random
 canvas_width = 300
 canvas_height = 300
 dots = []
-
+WDOTS = []
 
 # Classes for colors and dots
 
@@ -55,8 +55,16 @@ class WDot:
         self._gen_dots()
            
     def draw(self, canvas):
-        color_string = self.color.make_html()
-        canvas.draw_circle(self.pos, self.radius, 1, color_string, color_string)
+        for w in self.dots:
+            print w
+        #color_string = self.color.make_html()
+        #  [(187, 216), 26.6, 1, 'rgb(338, 374, 415)', 'rgb(338, 374, 415)']
+        canvas.draw_circle(w[0]
+                          , w[1]
+                          , 1
+                          , w[3]
+                          , w[4]
+                          )
         
    
     def _gen_dots(self):
@@ -64,13 +72,15 @@ class WDot:
             self.color.brighten()
             color_string = self.color.make_html()
             self.dots.append([self.pos
-                    , (self.radius + (0.2 * d))
+                    , (self.radius + (0.43 * d))
                     , 1
                     , color_string, color_string
            ])
+        
+        #d.draw(canvas) 
         self.dots.reverse()
-        for i in self.dots:
-            print i
+        #for i in self.dots:
+         #     print i
         
 # updates the life and causes the color to fade to white.
     def update(self):
@@ -83,34 +93,43 @@ class WDot:
         return self.life
 
 
+ 
+       
+
 # Event Handlers
-        
 def draw(canvas):
-    # Iterate over list(dots) instead of dots, to make a copy.
-    # This allows you to safely remove from dots inside the loop.
+    # iterate over list(dots) instead of dots, to make a copy.
+    #this allows you to safely remoe from dots inside the loop.
     for d in list(dots):
         d.update()
         d.draw(canvas)
-
-        # Remove dot if it's too old
+        #remove dot if it's too old
         if d.life <= 0:
             dots.remove(d)
- 
+                    
+def wdraw(canvas):
+    for d in list(WDOTS):
+        #print d.dots
+        d.draw(canvas)
+    return None         
+           
+     
 def click(pos):
     new_color = RGBcolor(random.randrange(0,256), random.randrange(0,256), random.randrange(0,256))
     print new_color
     print "HTML color is " + new_color.make_html()
     print
-    dots.append(WDot(pos, new_color, 20, 256))
-    WDot(pos, new_color, 20, 42)
+    #dots.append(WDot(pos, new_color, 20, 256))
+    WDOTS.append (WDot(pos, new_color, 25, 43))
     
 # Frame
 
-frame = simplegui.create_frame("Fading Dots", canvas_width, canvas_height) 
+frame = simplegui.create_frame("Water Color", canvas_width, canvas_height) 
 
 # Register Event Handlers
 
-frame.set_draw_handler(draw)
+#frame.set_draw_handler(draw)
+frame.set_draw_handler(wdraw)
 frame.set_mouseclick_handler(click)
 frame.set_canvas_background("White")
 
